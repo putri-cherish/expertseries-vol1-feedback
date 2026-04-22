@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback — Cherish × SpecialKids Expert Series Vol. 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1A1A2E;--yellow:#F5C518;--teal:#3ABFBF;--red:#D63031;--cream:#FAF8F4;--lgray:#F0EDE8;--mgray:#999;--dgray:#444}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--navy);min-height:100vh}
+.hero{background:var(--navy);padding:48px 24px 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--yellow),var(--teal))}
+.hero-badge{display:inline-block;border:1px solid rgba(58,191,191,.4);color:var(--teal);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:24px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,44px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:12px}
+.hero h1 span{color:var(--yellow)}
+.hero p{color:rgba(255,255,255,.6);font-size:14px;max-width:480px;margin:0 auto 24px;line-height:1.6}
+.hero-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.hero-meta span{font-size:12px;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:6px}
+.hero-meta span::before{content:'';width:5px;height:5px;background:var(--teal);border-radius:50%;flex-shrink:0}
+.rec-notice{background:var(--yellow);padding:14px 24px;text-align:center}
+.rec-notice p{font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.form-wrap{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+.sec-label{display:flex;align-items:center;gap:12px;margin:40px 0 20px}
+.sec-label::before,.sec-label::after{content:'';flex:1;height:1px;background:var(--lgray)}
+.sec-label span{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);white-space:nowrap}
+.card{background:#fff;border:1px solid #EDEAE4;border-radius:16px;padding:28px;margin-bottom:20px}
+.fg{margin-bottom:26px}
+label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px;line-height:1.4}
+label .req{color:var(--teal);margin-left:2px}
+label .sub{display:block;font-weight:400;font-size:12px;color:var(--mgray);margin-top:2px}
+input[type=text],input[type=email],textarea{width:100%;padding:13px 16px;border:1.5px solid #E0DDD8;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--navy);background:#fff;transition:border-color .2s,box-shadow .2s;outline:none}
+input:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(58,191,191,.12)}
+textarea{resize:vertical;min-height:96px;line-height:1.6}
+::placeholder{color:#bbb}
+.star-row{display:flex;flex-direction:row-reverse;gap:4px;width:fit-content}
+.star-row input{display:none}
+.star-row label{cursor:pointer;font-size:30px;color:#ddd;transition:color .15s;margin:0;padding:0;line-height:1;display:block;font-weight:400}
+.star-row label:hover,.star-row label:hover~label,.star-row input:checked~label{color:var(--yellow)}
+.scale-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.scale-row input{display:none}
+.scale-row label{width:42px;height:42px;border:1.5px solid #E0DDD8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--dgray);cursor:pointer;transition:all .15s;margin:0}
+.scale-row input:checked+label{background:var(--navy);border-color:var(--navy);color:#fff}
+.scale-row label:hover{border-color:var(--navy);color:var(--navy)}
+.scale-legend{display:flex;justify-content:space-between;font-size:10px;color:var(--mgray);margin-top:6px}
+.pill-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.pill-group input{display:none}
+.pill-group label{padding:8px 16px;border:1.5px solid #E0DDD8;border-radius:24px;font-size:13px;font-weight:400;color:var(--dgray);cursor:pointer;transition:all .15s;margin:0;background:#fff}
+.pill-group input:checked+label{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600}
+.pill-group label:hover{border-color:var(--teal);color:var(--teal)}
+.hlbox{background:#EAF8F8;border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:14px 18px;font-size:13px;color:var(--navy);margin-bottom:28px;line-height:1.5}
+.err-msg{color:var(--red);font-size:11px;margin-top:4px;display:none}
+.invalid input,.invalid textarea{border-color:var(--red)!important}
+.invalid .err-msg{display:block}
+.err-pill{font-size:11px;color:var(--red);display:none;margin-top:6px}
+.submit-area{text-align:center;padding-top:20px}
+.btn-submit{background:var(--navy);color:#fff;border:none;padding:16px 56px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;border-radius:50px;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.btn-submit:hover{background:var(--teal);transform:translateY(-2px);box-shadow:0 8px 24px rgba(58,191,191,.3)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.spinner{display:none;width:22px;height:22px;border:2px solid rgba(26,26,46,.2);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submit-note{font-size:12px;color:var(--mgray);margin-top:12px;line-height:1.5}
+.success-screen{display:none;text-align:center;padding:60px 24px;max-width:560px;margin:0 auto}
+.success-icon{width:80px;height:80px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:32px}
+.success-screen h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.success-screen p{font-size:14px;color:var(--mgray);line-height:1.6;margin-bottom:8px}
+.email-hl{display:inline-block;background:var(--lgray);border-radius:8px;padding:8px 18px;font-weight:600;color:var(--navy);font-size:14px;margin:12px 0}
+.social-row{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+.social-pill{background:var(--navy);color:var(--teal);border-radius:24px;padding:8px 18px;font-size:12px;font-weight:600;text-decoration:none;transition:background .15s}
+.social-pill:hover{background:var(--teal);color:#fff}
+@media(max-width:600px){.card{padding:20px}.scale-row label{width:36px;height:36px;font-size:12px}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Cherish × SpecialKids Expert Series Vol. 1</div>
+  <h1>We'd love to hear<br><span>what you think</span></h1>
+  <p>Your feedback shapes what we cover next — and unlocks your session recording.</p>
+  <div class="hero-meta">
+    <span>Behavioural Challenges in Children</span>
+    <span>25 April 2026</span>
+    <span>Takes ~3 minutes</span>
+  </div>
+</div>
+
+<div class="rec-notice">
+  <p>🎬 Complete this form to receive the <strong>session recording</strong> directly to your email.</p>
+</div>
+
+<div class="form-wrap">
+<form id="ff" novalidate>
+
+  <div class="sec-label"><span>Your Details</span></div>
+  <div class="card">
+    <div class="fg">
+      <label for="name">Full Name <span class="req">*</span></label>
+      <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name">
+      <div class="err-msg">Please enter your name.</div>
+    </div>
+    <div class="fg">
+      <label for="email">Email Address <span class="req">*</span>
+        <span class="sub">We'll send the recording here. Use the email you registered with.</span>
+      </label>
+      <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email">
+      <div class="err-msg">Please enter a valid email address.</div>
+    </div>
+    <div class="fg">
+      <label>I am a… <span class="req">*</span></label>
+      <div class="pill-group">
+        <input type="radio" name="role" id="r1" value="Parent / Caregiver"><label for="r1">Parent / Caregiver</label>
+        <input type="radio" name="role" id="r2" value="Early Childhood Educator"><label for="r2">Early Childhood Educator</label>
+        <input type="radio" name="role" id="r3" value="Healthcare Professional"><label for="r3">Healthcare Professional</label>
+        <input type="radio" name="role" id="r4" value="Student"><label for="r4">Student</label>
+        <input type="radio" name="role" id="r5" value="Other"><label for="r5">Other</label>
+      </div>
+      <div class="err-pill" id="role-err">Please select who you are.</div>
+    </div>
+  </div>
+
+  <div class="sec-label"><span>Session Feedback</span></div>
+  <div class="card">
+    <div class="fg">
+      <label>Overall session rating <span class="req">*</span></label>
+      <div class="star-row">
+        <input type="radio" name="overall" id="s5" value="5"><label for="s5">★</label>
+        <input type="radio" name="overall" id="s4" value="4"><label for="s4">★</label>
+        <input type="radio" name="overall" id="s3" value="3"><label for="s3">★</label>
+        <input type="radio" name="overall" id="s2" value="2"><label for="s2">★</label>
+        <input type="radio" name="overall" id="s1" value="1"><label for="s1">★</label>
+      </div>
+      <div class="err-pill" id="overall-err">Please rate the session.</div>
+    </div>
+    <div class="fg">
+      <label>Dr. Lian Wee Bin's presentation</label>
+      <div class="star-row">
+        <input type="radio" name="drlian" id="dl5" value="5"><label for="dl5">★</label>
+        <input type="radio" name="drlian" id="dl4" value="4"><label for="dl4">★</label>
+        <input type="radio" name="drlian" id="dl3" value="3"><label for="dl3">★</label>
+        <input type="radio" name="drlian" id="dl2" value="2"><label for="dl2">★</label>
+        <input type="radio" name="drlian" id="dl1" value="1"><label for="dl1">★</label>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Bevi Kavinolin Damanik's presentation</label>
+      <div class="star-row">
+        <input type="radio" name="bevi" id="bv5" value="5"><label for="bv5">★</label>
+        <input type="radio" name="bevi" id="bv4" value="4"><label for="bv4">★</label>
+        <input type="radio" name="bevi" id="bv3" value="3"><label for="bv3">★</label>
+        <input type="radio" name="bevi" id="bv2" value="2"><label for="bv2">★</label>
+        <input type="radio" name="bevi" id="bv1" value="1"><label for="bv1">★</label>
+      </div>
+    </div>
+    <div class="fg">
+      <label>How relevant was this session to your needs?</label>
+      <div class="scale-row">
+        <input type="radio" name="relevance" id="rl1" value="1"><label for="rl1">1</label>
+        <input type="radio" name="relevance" id="rl2" value="2"><label for="rl2">2</label>
+        <input type="radio" name="relevance" id="rl3" value="3"><label for="rl3">3</label>
+        <input type="radio" name="relevance" id="rl4" value="4"><label for="rl4">4</label>
+        <input type="radio" name="relevance" id="rl5" value="5"><label for="rl5">5</label>
+        <input type="radio" name="relevance" id="rl6" value="6"><label for="rl6">6</label>
+        <input type="radio" name="relevance" id="rl7" value="7"><label for="rl7">7</label>
+        <input type="radio" name="relevance" id="rl8" value="8"><label for="rl8">8</label>
+        <input type="radio" name="relevance" id="rl9" value="9"><label for="rl9">9</label>
+        <input type="radio" name="relevance" id="rl10" value="10"><label for="rl10">10</label>
+      </div>
+      <div class="scale-legend"><span>Not relevant</span><span>Extremely relevant</span></div>
+    </div>
+    <div class="fg">
+      <label>What was your biggest takeaway from today?</label>
+      <textarea name="valuable" placeholder="Share the most valuable thing you learned…"></textarea>
+    </div>
+  </div>
+
+  <div class="sec-label"><span>Help Us Improve</span></div>
+  <div class="card">
+    <div class="hlbox">Your honest input here directly shapes our next Expert Series session. Please be candid!</div>
+    <div class="fg">
+      <label>What should we add or do more of?
+        <span class="sub">More Q&A time, case studies, breakout sessions, etc.</span>
+      </label>
+      <textarea name="add_more" placeholder="e.g. More Q&A time, real case studies, smaller group discussions…"></textarea>
+    </div>
+    <div class="fg">
+      <label>What should we reduce or remove?</label>
+      <textarea name="reduce" placeholder="e.g. A section that felt too long, repetitive content…"></textarea>
+    </div>
+    <div class="fg">
+      <label>Overall, how was the session length?</label>
+      <div class="pill-group">
+        <input type="radio" name="format" id="f1" value="Too short"><label for="f1">Too short</label>
+        <input type="radio" name="format" id="f2" value="Just right"><label for="f2">Just right ✓</label>
+        <input type="radio" name="format" id="f3" value="Too long"><label for="f3">Too long</label>
+      </div>
+    </div>
+    <div class="fg">
+      <label>How was the Q&A session?</label>
+      <div class="pill-group">
+        <input type="radio" name="qa_rating" id="qa1" value="Not enough time"><label for="qa1">Not enough time</label>
+        <input type="radio" name="qa_rating" id="qa2" value="Good amount of time"><label for="qa2">Good amount of time</label>
+        <input type="radio" name="qa_rating" id="qa3" value="Too long"><label for="qa3">Too long</label>
+        <input type="radio" name="qa_rating" id="qa4" value="I didn't participate"><label for="qa4">I didn't participate</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label"><span>Shape Our Next Session</span></div>
+  <div class="card">
+    <div class="fg">
+      <label>Which topics would you like us to cover next?
+        <span class="sub">Select all that interest you.</span>
+      </label>
+      <div class="pill-group">
+        <input type="checkbox" name="topics" id="t1" value="ADHD & Attention Difficulties"><label for="t1">ADHD & Attention</label>
+        <input type="checkbox" name="topics" id="t2" value="Autism Spectrum Disorder"><label for="t2">Autism Spectrum</label>
+        <input type="checkbox" name="topics" id="t3" value="Anxiety in Children"><label for="t3">Anxiety in Children</label>
+        <input type="checkbox" name="topics" id="t4" value="Learning Difficulties & Dyslexia"><label for="t4">Learning Difficulties</label>
+        <input type="checkbox" name="topics" id="t5" value="Sensory Processing Issues"><label for="t5">Sensory Processing</label>
+        <input type="checkbox" name="topics" id="t6" value="Social Skills Development"><label for="t6">Social Skills</label>
+        <input type="checkbox" name="topics" id="t7" value="Parenting Strategies"><label for="t7">Parenting Strategies</label>
+        <input type="checkbox" name="topics" id="t8" value="Inclusive Education Practices"><label for="t8">Inclusive Education</label>
+        <input type="checkbox" name="topics" id="t9" value="Early Intervention"><label for="t9">Early Intervention</label>
+        <input type="checkbox" name="topics" id="t10" value="Mental Health in Children"><label for="t10">Mental Health</label>
+        <input type="checkbox" name="topics" id="t11" value="Navigating the School System"><label for="t11">Navigating School System</label>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Any other topic suggestions?</label>
+      <textarea name="topic_other" placeholder="Suggest a topic not listed above…" style="min-height:72px"></textarea>
+    </div>
+    <div class="fg">
+      <label>Do you have a suggested guest speaker?
+        <span class="sub">Name, specialty, or organisation — any lead is welcome!</span>
+      </label>
+      <textarea name="guest_speaker" placeholder="e.g. 'A child psychologist specialising in school refusal' or a specific name…" style="min-height:80px"></textarea>
+    </div>
+    <div class="fg">
+      <label>What format would you prefer for future sessions?</label>
+      <div class="pill-group">
+        <input type="radio" name="future_format" id="ff1" value="Online webinar"><label for="ff1">Online webinar</label>
+        <input type="radio" name="future_format" id="ff2" value="In-person event"><label for="ff2">In-person</label>
+        <input type="radio" name="future_format" id="ff3" value="Hybrid"><label for="ff3">Hybrid</label>
+        <input type="radio" name="future_format" id="ff4" value="Workshop / hands-on"><label for="ff4">Workshop</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label"><span>One Last Thing</span></div>
+  <div class="card">
+    <div class="fg">
+      <label>How likely are you to recommend this series to a friend or colleague?</label>
+      <div class="scale-row">
+        <input type="radio" name="nps" id="n0" value="0"><label for="n0">0</label>
+        <input type="radio" name="nps" id="n1" value="1"><label for="n1">1</label>
+        <input type="radio" name="nps" id="n2" value="2"><label for="n2">2</label>
+        <input type="radio" name="nps" id="n3" value="3"><label for="n3">3</label>
+        <input type="radio" name="nps" id="n4" value="4"><label for="n4">4</label>
+        <input type="radio" name="nps" id="n5" value="5"><label for="n5">5</label>
+        <input type="radio" name="nps" id="n6" value="6"><label for="n6">6</label>
+        <input type="radio" name="nps" id="n7" value="7"><label for="n7">7</label>
+        <input type="radio" name="nps" id="n8" value="8"><label for="n8">8</label>
+        <input type="radio" name="nps" id="n9" value="9"><label for="n9">9</label>
+        <input type="radio" name="nps" id="n10" value="10"><label for="n10">10</label>
+      </div>
+      <div class="scale-legend"><span>Not likely</span><span>Extremely likely</span></div>
+    </div>
+    <div class="fg">
+      <label>Anything else you'd like to share?</label>
+      <textarea name="anything_else" placeholder="Any other thoughts, suggestions, or kind words for the team…" style="min-height:80px"></textarea>
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button type="submit" class="btn-submit" id="submitBtn">Submit &amp; Get My Recording →</button>
+    <div class="spinner" id="spinner"></div>
+    <p class="submit-note">🔒 Your responses are confidential and used only to improve our program.<br>The recording link will be sent to your email within 24 hours after the event.</p>
+  </div>
+
+</form>
+
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">🎉</div>
+  <h2>Thank you so much!</h2>
+  <p>Your feedback means the world to us and will shape Expert Series Vol. 2.</p>
+  <p>We'll send the recording to:</p>
+  <div class="email-hl" id="successEmail">your@email.com</div>
+  <p style="font-size:13px;color:#999;margin-top:8px">Please allow up to 24 hours after the event. Check your spam folder if you don't see it!</p>
+  <div style="margin-top:28px;padding:20px;background:#f8f8f8;border-radius:12px">
+    <p style="font-size:12px;font-weight:600;color:#444;margin-bottom:12px">Follow us for Vol. 2 updates ↓</p>
+    <div class="social-row">
+      <a class="social-pill" href="https://instagram.com/cherishacademy.id" target="_blank">@cherishacademy.id</a>
+      <a class="social-pill" href="https://instagram.com/theskiltcentre" target="_blank">@theskiltcentre</a>
+      <a class="social-pill" href="https://instagram.com/_specialkidsclinic_" target="_blank">@_specialkidsclinic_</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ── STEP 1: Paste your Google Apps Script Web App URL here ──────────────────
+const SCRIPT_URL = "YOUR_SCRIPT_URL_HERE";
+// e.g. const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby.../exec"
+// ────────────────────────────────────────────────────────────────────────────
+
+const form      = document.getElementById('ff');
+const submitBtn = document.getElementById('submitBtn');
+const spinner   = document.getElementById('spinner');
+const success   = document.getElementById('successScreen');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  let valid = true;
+
+  const name = document.getElementById('name');
+  const nameG = name.closest('.fg');
+  if (!name.value.trim()) { nameG.classList.add('invalid'); valid = false; }
+  else nameG.classList.remove('invalid');
+
+  const email = document.getElementById('email');
+  const emailG = email.closest('.fg');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { emailG.classList.add('invalid'); valid = false; }
+  else emailG.classList.remove('invalid');
+
+  const roleChk = document.querySelector('input[name="role"]:checked');
+  const roleErr = document.getElementById('role-err');
+  if (!roleChk) { roleErr.style.display = 'block'; valid = false; }
+  else roleErr.style.display = 'none';
+
+  const overallChk = document.querySelector('input[name="overall"]:checked');
+  const overallErr = document.getElementById('overall-err');
+  if (!overallChk) { overallErr.style.display = 'block'; valid = false; }
+  else overallErr.style.display = 'none';
+
+  if (!valid) {
+    document.querySelector('.invalid, [style*="block"]')?.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
+  const data = {
+    name:          name.value.trim(),
+    email:         email.value.trim(),
+    role:          roleChk?.value || '',
+    overall_rating: overallChk?.value || '',
+    drlian_rating: document.querySelector('input[name="drlian"]:checked')?.value || '',
+    bevi_rating:   document.querySelector('input[name="bevi"]:checked')?.value || '',
+    relevance:     document.querySelector('input[name="relevance"]:checked')?.value || '',
+    valuable:      form.valuable.value.trim(),
+    add_more:      form.add_more.value.trim(),
+    reduce:        form.reduce.value.trim(),
+    format:        document.querySelector('input[name="format"]:checked')?.value || '',
+    qa_rating:     document.querySelector('input[name="qa_rating"]:checked')?.value || '',
+    topics:        [...document.querySelectorAll('input[name="topics"]:checked')].map(c=>c.value).join(', '),
+    topic_other:   form.topic_other.value.trim(),
+    guest_speaker: form.guest_speaker.value.trim(),
+    future_format: document.querySelector('input[name="future_format"]:checked')?.value || '',
+    nps:           document.querySelector('input[name="nps"]:checked')?.value || '',
+    anything_else: form.anything_else.value.trim(),
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.style.display = 'none';
+  spinner.style.display = 'block';
+
+  try {
+    if (SCRIPT_URL !== "https://script.google.com/macros/s/AKfycbz4p2vQN23A0vUD9PqMYuhWgI74IeKLiWOXhsuepj-ylfgjPcqu_i02Fq3CqIG5Ehva/exec") {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data),
+      });
+    }
+    document.getElementById('successEmail').textContent = data.email;
+    form.style.display = 'none';
+    success.style.display = 'block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  } catch(err) {
+    spinner.style.display = 'none';
+    submitBtn.style.display = 'inline-block';
+    submitBtn.disabled = false;
+    alert('Something went wrong. Please try again or contact us directly.');
+  }
+});
+
+form.querySelectorAll('input,textarea').forEach(el => {
+  el.addEventListener('input', () => el.closest('.fg')?.classList.remove('invalid'));
+});
+</script>
+</body>
+</html>
